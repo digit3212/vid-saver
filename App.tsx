@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import LinkInput from './components/VideoGenerator';
 import VideoCard from './components/VideoCard';
@@ -9,6 +9,7 @@ import { DownloadedItem, VideoPlatform } from './types';
 import { PrivacyPolicy, TermsOfUse, AboutUs, ContactUs, DMCA, AdvertiseWithUs } from './components/InfoPages';
 import { IconYoutube, IconTiktok, IconInstagram, IconFacebook, IconDownload, IconUsers, IconCheck, IconHelp, IconSmartphone, IconMegaphone, IconLink, IconGlobe, IconActivity, IconEye, IconServer, IconSparkles } from './components/Icons';
 import CommentsSection from './components/CommentsSection';
+import { adConfig } from './adConfig';
 
 type PageView = 'home' | 'download' | 'privacy' | 'terms' | 'about' | 'contact' | 'dmca' | 'advertise';
 
@@ -138,6 +139,26 @@ const App: React.FC = () => {
   
   const t = translations[lang];
 
+  // Inject Popunder Ad Globally
+  useEffect(() => {
+    if (adConfig.popunder && adConfig.popunder.trim() !== "") {
+      // Create a temporary container to execute the script
+      const div = document.createElement('div');
+      div.innerHTML = adConfig.popunder;
+      const scripts = div.getElementsByTagName('script');
+      for (let i = 0; i < scripts.length; i++) {
+        const script = document.createElement('script');
+        if (scripts[i].src) {
+           script.src = scripts[i].src;
+           script.async = true;
+        } else {
+           script.innerHTML = scripts[i].innerHTML;
+        }
+        document.body.appendChild(script);
+      }
+    }
+  }, []);
+
   const handleItemProcessed = (item: DownloadedItem) => {
     setItems((prev) => [item, ...prev]);
   };
@@ -177,7 +198,7 @@ const App: React.FC = () => {
 
             {/* AD BANNER (Top of Page - High Visibility) */}
             <div className="max-w-4xl mx-auto mb-4 relative z-20 animate-fadeInDown">
-               <AdBanner slot="home-top" />
+               <AdBanner slot="home-top" adCode={adConfig.bannerTopBottom} />
             </div>
 
             {/* Hero Section */}
@@ -358,7 +379,7 @@ const App: React.FC = () => {
             <div className="max-w-6xl mx-auto my-12 space-y-8">
                {/* Ad 1 */}
                <div className="max-w-4xl mx-auto">
-                 <AdBanner slot="separator-ad-1" />
+                 <AdBanner slot="separator-ad-1" adCode={adConfig.bannerSquare} />
                </div>
 
                {/* Expanded Live Stats Separator - 6 Items */}
@@ -418,7 +439,7 @@ const App: React.FC = () => {
 
                {/* Ad 2 */}
                <div className="max-w-4xl mx-auto">
-                 <AdBanner slot="separator-ad-2" />
+                 <AdBanner slot="separator-ad-2" adCode={adConfig.bannerSquare} />
                </div>
             </div>
 
@@ -545,7 +566,7 @@ const App: React.FC = () => {
 
               {/* AD BANNER (Before Footer) */}
               <div className="max-w-4xl mx-auto">
-                 <AdBanner slot="home-footer" />
+                 <AdBanner slot="home-footer" adCode={adConfig.bannerTopBottom} />
               </div>
 
             </div>

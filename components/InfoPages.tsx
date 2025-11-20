@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { IconArrowLeft, IconArrowRight, IconMail, IconShield, IconFileText, IconUsers, IconCopyright, IconMegaphone, IconCheck } from './Icons';
 import AdBanner from './AdBanner';
+import { adConfig } from '../adConfig';
 
 interface PageProps {
   lang: 'ar' | 'en';
@@ -53,7 +55,7 @@ export const PrivacyPolicy: React.FC<PageProps> = ({ lang, onBack }) => {
         </div>
         
         <div className="relative z-10 mt-8">
-            <AdBanner slot="privacy-bottom" />
+            <AdBanner slot="privacy-bottom" adCode={adConfig.bannerSquare} />
         </div>
       </div>
     </div>
@@ -99,7 +101,7 @@ export const TermsOfUse: React.FC<PageProps> = ({ lang, onBack }) => {
         </div>
 
         <div className="relative z-10 mt-8">
-            <AdBanner slot="terms-bottom" />
+            <AdBanner slot="terms-bottom" adCode={adConfig.bannerSquare} />
         </div>
       </div>
     </div>
@@ -142,7 +144,7 @@ export const DMCA: React.FC<PageProps> = ({ lang, onBack }) => {
         </div>
 
         <div className="relative z-10 mt-8">
-            <AdBanner slot="dmca-bottom" />
+            <AdBanner slot="dmca-bottom" adCode={adConfig.bannerSquare} />
         </div>
       </div>
     </div>
@@ -180,7 +182,7 @@ export const AboutUs: React.FC<PageProps> = ({ lang, onBack }) => {
         </div>
         
         <div className="relative z-10 mt-8">
-            <AdBanner slot="about-bottom" />
+            <AdBanner slot="about-bottom" adCode={adConfig.bannerSquare} />
         </div>
       </div>
     </div>

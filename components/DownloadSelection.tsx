@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import { DownloadedItem, VideoPlatform } from '../types';
 import { IconArrowRight, IconArrowLeft, IconVideo, IconHeadphones, IconDownload, IconBan, IconSparkles, IconMusic, IconCheck, IconLink } from './Icons';
 import AdBanner from './AdBanner';
+import { adConfig } from '../adConfig';
 
 interface DownloadSelectionProps {
   item: DownloadedItem;
@@ -96,7 +98,7 @@ const DownloadSelection: React.FC<DownloadSelectionProps> = ({ item, lang, onBac
           )}
 
           {/* AD BANNER TOP */}
-          <AdBanner slot="download-top" />
+          <AdBanner slot="download-top" adCode={adConfig.bannerSquare} />
 
           {isTikTok ? (
              /* --- TIKTOK SPECIAL 3-SECTION LAYOUT --- */
@@ -242,7 +244,7 @@ const DownloadSelection: React.FC<DownloadSelectionProps> = ({ item, lang, onBac
           )}
           
           {/* AD BANNER BOTTOM */}
-          <AdBanner slot="download-bottom" />
+          <AdBanner slot="download-bottom" adCode={adConfig.bannerSquare} />
 
         </div>
       </div>
